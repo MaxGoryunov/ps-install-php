@@ -45,7 +45,7 @@ Write-Output "Checking for downloadable PHP versions..."
 $AllVersions = @()
 foreach ($url in @("http://windows.php.net/downloads/releases/", "http://windows.php.net/downloads/releases/archives/")) {
     $Page = Invoke-WebRequest -URI $url
-    $Page.Links | Where-Object { $_.innerText -match "^php-(\d{1,}\.\d{1,}\.\d{1,})-(nts-)?.*(VC\d\d?)-(x\d\d).zip" } | ForEach-Object {
+    $Page.Links | Where-Object { $_.innerText -match "^php-(\d{1,}\.\d{1,}\.\d{1,})-(nts-)?.*(vs\d\d?)-(x\d\d).zip" } | ForEach-Object {
         $php = @{}
         $php['version'] = New-Object -TypeName System.Version($Matches[1])
         $php['vc'] = ($Matches[3] + '_' + $Matches[4]).ToUpper()
